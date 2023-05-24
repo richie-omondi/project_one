@@ -139,7 +139,7 @@ int add_alias(char *alias, shell_data *shell)
 	for (j = 0; shell->aliases[j]; j++)
 	{
 		if (str_cmp(buffer, shell->aliases[j]) == 0)
-		{	
+		{
 			free(shell->aliases[j]);
 			break;
 		}

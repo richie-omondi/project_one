@@ -15,7 +15,7 @@ void add_data_to_shell(shell_data *shell, int ac, char *av[], char **env)
 	shell->input = NULL;
 	shell->command = NULL;
 	shell->counter = 0;
-	
+
 	int index = 0;
 
 	if (ac == 1)
