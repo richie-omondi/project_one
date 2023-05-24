@@ -57,7 +57,7 @@ void get_words(shell_data *shell)
 	int index = 0;
 	int len = 0;
 	int words = 2;
-	char *splitter = " \t"; 
+	char *splitter = " \t";
 
 	for (index = 0; *(shell->input + index); index++)
 		len++;
@@ -83,7 +83,6 @@ void get_words(shell_data *shell)
 		perror(shell->exe);
 		exit(errno);
 	}
-
 	for (index = 0; index < len; index++)
 	{
 		if (str_chr(*(shell->input + index, splitter)) != NULL)

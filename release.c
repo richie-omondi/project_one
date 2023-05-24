@@ -16,7 +16,7 @@ void free_ptrs_arr(char **arr)
 }
 
 /**
- * free_specific_shell_data - frees the respective fields from 
+ * free_specific_shell_data - frees the respective fields from
  * the shell_data struct
  * @shell: shell_data struct containing data fed to the shell
  *
@@ -40,7 +40,7 @@ void free_specific_shell_data(shell_data *shell)
 }
 
 /**
- * free_all_data - frees all data fed to the shell
+ * free_and_close - frees all data fed to the shell
  * @shell: struct containing data fed to the shell
  *
  * Return: void

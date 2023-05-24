@@ -62,6 +62,6 @@ int get_line(shell_data *shell)
 	free(commands);
 	free(operators);
 	close(bytes);
-	
+
 	return (str_len(shell->input));
 }

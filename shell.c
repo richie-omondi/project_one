@@ -32,7 +32,8 @@ int main(int ac, char *argv[], char *envp[])
 	{
 		implement_prompt(av, env);
 	}
-	while (1) {
+	while (1)
+	{
 		printf("shell> ");
 		readCommand(command);
 		parseCommand(command, arguments);
