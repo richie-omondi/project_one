@@ -73,8 +73,9 @@ void get_words(shell_data *shell)
 		{
 			words++;
 			index += len_word(shell->input, splitter);
+
+			return (words);
 		}
-		return (words)
 	}
 
 	shell->words = malloc(words * sizeof(char *));
