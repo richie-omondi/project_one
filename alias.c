@@ -72,9 +72,9 @@ void show_full_name_alias(shell_data *shell)
 			if (temporary_string != NULL)
 			{
 				for (int k = index; k < index + j; k++)
-					*(buffer + k) = '\0'
+					*(buffer + k) = '\0';
 			}
-			str_cat(buffer, temp_string);
+			str_cat(buffer, temporary_string);
 			is_full_name = true;
 		}
 	}
@@ -155,7 +155,7 @@ int add_alias(char *alias, shell_data *shell)
 		shell->aliases[j] = malloc(str_len(alias) + 1);
 		_strncpy(shell->aliases[j], alias, str_len(alias));
 
-	free(shell->aliases[j];
+	free(shell->aliases[j]);
 	return (0);
 }
 

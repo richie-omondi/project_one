@@ -67,7 +67,7 @@ int set_env_variable(char *env_variable, char *env_value, shell_data *shell)
 		{
 			while (env[i][variable_length] == ' ')
 				variable_length++;
-			is_new_varible = true;
+			new_varible = true;
 			free(env[i]);
 			break;
 		}
@@ -77,7 +77,7 @@ int set_env_variable(char *env_variable, char *env_value, shell_data *shell)
 	str_cat(new_variable, "=");
 	str_cat(new_variable, env_value);
 
-	if (is_new_variable)
+	if (new_variable)
 		env[i] = new_variable;
 	free(new_variable);
 	return (0);

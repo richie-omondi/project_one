@@ -1,3 +1,5 @@
+#include "shell.h"
+
 /**
  * free_ptrs_arr - frees each pointer in an array of pointers and the array
  * @arr: array of pointers
@@ -10,8 +12,8 @@ void free_ptrs_arr(char **arr)
 
 	if (arr == NULL)
 		return;
-	for (i = 0; *(array + i); i++)
-		free(*(array + i));
+	for (i = 0; *(arr + i); i++)
+		free(*(arr + i));
 	free(arr);
 }
 
