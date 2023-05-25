@@ -1,5 +1,7 @@
 #include "shell.h"
 
+#define MAX_COMMAND_LENGTH 100
+
 /**
  * handle_signal - prints a new prompt upon a signal
  * @signal: signal
@@ -30,7 +32,7 @@ int main(int ac, char *argv[], char *envp[])
 
 	if (ac == 1)
 	{
-		implement_prompt(av, env);
+		implement_prompt(ac, envp);
 	}
 	while (1)
 	{

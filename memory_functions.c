@@ -16,7 +16,7 @@ char *mem_cpy(char *destination, char *source, unsigned int n)
 	{
 		*(destination + i) = *(source + i);
 	}
-	return (dest);
+	return (destination);
 }
 
 /**

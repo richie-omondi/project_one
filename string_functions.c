@@ -106,11 +106,13 @@ char *str_cpy(char *destination, char *source)
 char *str_cat(char *destination, char *source)
 {
 	int i = 0;
-	int destination_length = 0;
+	int destination_length = str_len(destination);
 
-	while (destination_length[i++])
-		destination_length++;
-	for (i = 0; source[i]; i++)
-		destination[destination_length++] = source[i];
+	while (source[i] != '\0')
+	{
+		destination[destination_length + 1] = source[i];
+		i++;
+	}
+	destination[destination_length + i] = '\0';
 	return (destination);
 }
