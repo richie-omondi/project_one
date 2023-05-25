@@ -1,5 +1,11 @@
 # include "shell.h"
 
+/**
+ * _help - give more information about the built-ins
+ * @shell: struct containing data fed to the shell
+ *
+ * Return: 0 on success
+ */
 int _help(shell_data *shell)
 {
 	int index;
@@ -8,8 +14,7 @@ int _help(shell_data *shell)
 
 	if (shell->words[1] == NULL)
 		string = "Hell In A Shell\nThese are the functions that have been built-in "
-			"so far.\nType 'help function' to find out more about the function.\n\n "
-			"[BUILTIN_NAME]\n\nDisplay information about builtin commands.\n\n  "
+			"so far.\nType 'help function' to find out more about the function.\n\n"
 			"alias   \talias [NAME[='VALUE'] ...]\n  cd    \tcd  [DIRECTORY]\n  exit    \t"
 			"exit [STATUS]\n  env     \tenv\n  setenv  \tsetenv [VARIABLE] [VALUE]\n  "
 			"unsetenv\tunsetenv [VARIABLE]\n";
@@ -34,19 +39,11 @@ int _help(shell_data *shell)
 	{
 		errno = EINVAL;
 		perror(shell->command);
-		return (0);
+		exit(errno);
 	}
 
 	len = str_len(string);
-	if (shell->words[2] != NULL)
-	{
-		errno = E2BIG;
-		perror(shell->command);
-		return (2);
-	}
 
 	print_string(1, string, length);
 	return (0);
 }
-
-
