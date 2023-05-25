@@ -8,17 +8,14 @@ int _help(shell_data *shell)
 	if (shell->words[1] == NULL)
 		string = "Hell In A Shell\nThese are the functions that have been built-in "
 			"so far.\nType 'help function' to find out more about the function.\n\n"
-<<<<<<< HEAD
 			"alias   \talias [NAME[='VALUE'] ...]\n  cd    \tcd  [DIRECTORY]\n  exit    \t"
 			"exit [STATUS]\n  env     \tenv\n  setenv  \tsetenv [VARIABLE] [VALUE]\n  "
-=======
 			"[BUILTIN_NAME]\n\nDisplay information about builtin commands.\n\n"
 			"alias   \talias [NAME[='VALUE'] ...]\n  "
 			"cd    \tcd  [DIRECTORY]\n "
 			"exit    \texit [STATUS]\n "
 			"env     \tenv\n  "
 			"setenv  \tsetenv [VARIABLE] [VALUE]\n  "
->>>>>>> c59f8ad7a53cdf800086f4e1f54f3cf66f91ed94
 			"unsetenv\tunsetenv [VARIABLE]\n";
 	else if (str_cmp(shell->words[1], "exit") == 0)
 		string = "exit:\n\nexit [status]\n\nExit the shell.\n\nArguments:\n\nstatus "
