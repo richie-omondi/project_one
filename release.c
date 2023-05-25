@@ -28,7 +28,9 @@ void free_specific_shell_data(shell_data *shell)
 {
 	if (shell->words != NULL)
 	{
-		for (int i = 0; shell->words[i] != NULL; i++)
+		int i;
+
+		for (i = 0; shell->words[i] != NULL; i++)
 			free(shell->words[i]);
 		free(shell->words);
 	}
