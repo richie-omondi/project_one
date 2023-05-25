@@ -28,7 +28,7 @@ void loop_shell(char *shell_sign, shell_data *shell)
 			{
 				result = execute_commands(shell);
 				if (result != 0)
-					create_error(result, shell);
+					show_error(result, shell);
 			}
 			free_specific_shell_data(shell);
 		}

@@ -12,11 +12,11 @@ int print_string(char *s)
 }
 
 /**
- * create_error - prints errors to stderr
+ * show_error - prints errors to stderr
  * @code: error code to be printed
  * @shell: struct containing data fed to the shell
  */
-int create_error(int code, shell_data *shell)
+int show_error(int code, shell_data *shell)
 {
 	char *string;
 	int len = 0;
