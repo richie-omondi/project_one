@@ -129,4 +129,13 @@ int _cd(shell_data *shell);
 /***** Help functions *******/
 int _help(shell_data *shell);
 
+/**** Hanlde Built-in function ******/
+int builtin_set_env_wrapper(void *args);
+int handle_builtins(shell_data *shell);
+
+/***** Path functions *******/
+int check_exe(char *path);
+char **separate_path(shell_data *shell);
+int handle_path(shell_data *shell);
+
 #endif
