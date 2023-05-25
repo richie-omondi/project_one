@@ -18,7 +18,7 @@
 /******* Structs **********/
 
 /**
- * struct data- struct for data fed to the shell
+ * struct data - struct for data fed to the shell
  * @exe: executable file
  * @input: pointer to the input
  * @command: pointer to a command typed by the user
@@ -39,6 +39,31 @@ typedef struct data
 	int counter;
 	int fd;
 } shell_data;
+
+/**
+ * struct builtin_functions - struct containing components of a
+ * built-in function
+ * @f_name: built-in function name
+ * @(*f)(shell_data *shell): function pointer
+ */
+typedef struct builtin_functions
+{
+	char *f_name;
+	int (*f)(shell_data *shell);
+} builtins_list;
+
+/**
+ * struct set_env_args - struct containing set_env_variable arguments
+ * @shell: struct containing data fed to the shell
+ * @env_variable: environment variable
+ * @env_value: environment value
+ */
+struct set_env_args
+{
+	shell_data *shell;
+	char *env_variable;
+	char *env_value;
+}
 
 /****** Prototypes ********/
 void add_data_to_shell(shell_data *shell, int argc, char *argv[], char **env);
@@ -100,5 +125,8 @@ int exit_shell(shell_data *shell);
 /**** Change Directory functions *******/
 int directory(char *new_directory, shell_data *shell);
 int _cd(shell_data *shell);
+
+/***** Help functions *******/
+int _help(shell_data *shell);
 
 #endif
