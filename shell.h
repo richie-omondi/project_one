@@ -83,7 +83,7 @@ int str_cmp(char *string_1, char *string_2);
 int _strncmp(char *str1, char *str2, size_t n);
 char *_strpbrk(char *str, char *accept);
 char *_strndup(char *s, size_t n);
-char *str_chr(char *str, char *c);
+char *str_chr(char *str, char c);
 
 /***** Memory functions *******/
 char *mem_cpy(char *destination, char *source, unsigned int n);

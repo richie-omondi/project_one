@@ -90,7 +90,6 @@ char *_strndup(char *s, size_t n)
 
 	while (*(s + length))
 		length++;
-
 	if (n < length)
 		length = n;
 
@@ -99,7 +98,7 @@ char *_strndup(char *s, size_t n)
 	if (dup == NULL)
 		return (NULL);
 
-	for (i = 0; index < length; i++)
+	for (i = 0; i < length; i++)
 		*(dup + i) = *(s + i);
 
 	*(dup + length) = '\0';

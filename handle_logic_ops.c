@@ -9,7 +9,9 @@
  */
 int handle_logical_ops(char **commands, int i)
 {
-	for (int j = 0; commands[i] != NULL; j++)
+	int j;
+	/** int j is declared earlier to make it compatible with compiler version*/
+	for (j = 0; commands[i] != NULL; j++)
 	{
 		if (commands[i][j] == '&' && commands[i][j + 1] == '&')
 		{
