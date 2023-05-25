@@ -69,6 +69,7 @@ struct set_env_args
 void add_data_to_shell(shell_data *shell, int argc, char *argv[], char **env);
 int handle_logical_ops(char **commands, int i);
 int get_line(shell_data  *shell);
+void loop_shell(char *shell_sign, shell_data *shell);
 
 /***** Execute functions *******/
 int execute_commands(shell_data *shell);
@@ -101,6 +102,7 @@ int is_digit(int i);
 /******* Print functions ********/
 int print_string(char *s);
 void print_current_environment(shell_data *shell);
+int show_error(int code, shell_data *shell);
 
 /****** Environment functions *********/
 char *get_env_value(char *env_variable, shell_data *shell);

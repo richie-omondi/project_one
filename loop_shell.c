@@ -25,12 +25,13 @@ void loop_shell(char *shell_sign, shell_data *shell)
 			handle_variables(shell);
 			get_words(shell);
 			if (shell->words[0])
+			{
 				result = execute_commands(shell);
 				if (result != 0)
-          _print_error(error_code, data);
-      }
-      free_recurrent_data(data);
-    }
-  }
+					show_error(result, shell);
+			}
+			free_specific_shell_data(shell);
+		}
+	}
 }
 
