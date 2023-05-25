@@ -67,10 +67,11 @@ struct set_env_args
 
 /****** Prototypes ********/
 void add_data_to_shell(shell_data *shell, int argc, char *argv[], char **env);
-void readCommand(char *command, int maxLength);
-void parseCommand(char *command, char **arguments);
 int handle_logical_ops(char **commands, int i);
 int get_line(shell_data  *shell);
+
+/***** Execute functions *******/
+int execute_commands(shell_data *shell);
 
 /******** String functions *******/
 char *str_dup(char *string);

@@ -19,32 +19,33 @@ int execute_commands(shell_data *shell)
 
 	code = handle_path(shell);
 
-	if (code = handle_path(shell))
+	if (code)
 		return (code);
-	child_pid = fork();
-	
-	if (child_pid == -1)
-	{
-		perror(shell->command);
-		exit(EXIT_FAILURE);
-	}
-	if (child_pid == 0)
-	{
-		code = execve(shell->words[0], shell->words, shell->env);
-		if (code == -1)
+	else
+		child_pid = fork();
+
+		if (child_pid == -1)
 		{
-			perror(data->command_name);
+			perror(shell->command);
 			exit(EXIT_FAILURE);
 		}
-	}
-	else
-	{
-		wait(&shell_status);
-		if (WIFEXITED(shell_status))
-			errno = WEXITSTATUS(shell_status);
-		else if (WIFSIGNALED(shell_status))
-			errno = 128 + WTERMSIG(shell_status);
-	}
+		if (child_pid == 0)
+		{
+			code = execve(shell->words[0], shell->words, shell->env);
+			if (code == -1)
+			{
+				perror(data->command_name);
+				exit(EXIT_FAILURE);
+			}
+		}
+		else
+		{
+			wait(&shell_status);
+			if (WIFEXITED(shell_status))
+				errno = WEXITSTATUS(shell_status);
+			else if (WIFSIGNALED(shell_status))
+				errno = 128 + WTERMSIG(shell_status);
+		}
 
-	return (0);
+		return (0);
 }
