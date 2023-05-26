@@ -32,3 +32,24 @@ int is_digit(int i)
 {
 	return (i >= 48 && i <= 57);
 }
+
+/**
+ * num_char - locates and counts number of apperances of a character
+ * in a string
+ * @str: string
+ * @letter: character to be located
+ *
+ * Return: final number
+ */
+int num_char(char *str, char *letter)
+{
+	int i
+	int num = 0;
+
+	for (i = 0; str[i] != '\0'; i++)
+	{
+		if (str[i] == letter[0])
+			num++;
+	}
+	return (num);
+}

@@ -11,11 +11,11 @@
  */
 void add_data_to_shell(shell_data *shell, int ac, char *av[], char **env)
 {
+	int index = 0;
+
 	shell->exe = av[0];
 	shell->input = NULL;
 	shell->command = NULL;
-
-	int index = 0;
 
 	if (ac == 1)
 		shell->fd = STDIN_FILENO;
@@ -31,19 +31,13 @@ void add_data_to_shell(shell_data *shell, int ac, char *av[], char **env)
 	shell->words = NULL;
 	shell->env = _calloc(100, sizeof(char *));
 	if (shell->env == NULL)
-	{
-		perror(shell->env);
 		exit(127);
-	}
 	for (index = 0; env[index]; index++)
 		shell->env[index] = str_dup(env[index]);
 	shell->env[index] = NULL;
 	shell->aliases = _calloc(50, sizeof(char *));
 	if (shell->aliases == NULL)
-	{
-		perror(shell->aliases);
 		exit(127);
-	}
 	for (index = 0; index < 50; index++)
 		shell->aliases[index] = NULL;
 	free_and_close(shell);

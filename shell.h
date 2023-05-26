@@ -64,7 +64,7 @@ struct set_env_args
 }
 
 /****** Prototypes ********/
-void add_data_to_shell(shell_data *shell, int argc, char *argv[], char **env);
+void add_data_to_shell(shell_data *shell, int ac, char *av[], char **env);
 int handle_logical_ops(char **commands, int i);
 int get_line(shell_data  *shell);
 void loop_shell(char *shell_sign, shell_data *shell);
@@ -96,6 +96,7 @@ void free_and_close(shell_data *shell);
 /****** Math/Number functions ********/
 int _pow(int x, int y);
 int is_digit(int i);
+int num_char(char *str, char *letter);
 
 /******* Print functions ********/
 int print_string(char *s);

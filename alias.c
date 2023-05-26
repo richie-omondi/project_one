@@ -16,14 +16,13 @@ char *alias(shell_data *shell, char *full_name)
 		return (NULL);
 
 	len = str_len(full_name);
+	char *str = malloc(str_len(shell->aliases[index]) - len + 1)
 
 	for (index = 0; shell->aliases[index]; index++)
 	{
 		if (_strncmp(full_name, shell->aliases[index], len) == 0 &&
 				shell->aliases[index][len] == '=')
 		{
-			char *str = malloc(str_len(shell->aliases[index]) - len + 1);
-
 			if (str == NULL)
 				return (NULL);
 			mem_cpy(str, shell->aliases[index] + len + 1,
@@ -46,9 +45,11 @@ void show_full_name_alias(shell_data *shell)
 {
 	int index;
 	int j;
+	int k;
 	bool is_full_name = false;
 	char *buffer = shell->input;
 	char *full_name = NULL;
+	char *temporary_string;
 
 	if (buffer == NULL)
 		return;
@@ -67,11 +68,11 @@ void show_full_name_alias(shell_data *shell)
 				*(full_name + j - 1) = *(buffer + index + j);
 			*(full_name + j - 1) = '\0';
 
-			char *temporary_string = alias(shell, full_name);
+			temporary_string = alias(shell, full_name);
 
 			if (temporary_string != NULL)
 			{
-				for (int k = index; k < index + j; k++)
+				for (k = index; k < index + j; k++)
 					*(buffer + k) = '\0';
 			}
 			str_cat(buffer, temporary_string);
@@ -91,19 +92,21 @@ void show_full_name_alias(shell_data *shell)
  */
 int show_alias(char *alias, shell_data *shell)
 {
+	char **alias_entry;
+
 	if (shell->aliases == NULL)
 		return (0);
 
-	for (char **alias_entry = shell->aliases; *alias_entry != NULL; alias_entry++)
+	for (alias_entry = shell->aliases; *alias_entry != NULL; alias_entry++)
 	{
 		char *name = *alias_entry;
 		char *value = *alias_entry + str_len(*alias_entry) + 1;
 
 		if (alias == NULL || str_cmp(*alias_entry, alias) == 0)
 		{
-			write(1, *alias_entry, str_len(*alias_entry));
+			write(1, name, str_len(*alias_entry));
 			write(1, " = ", 3);
-			write(1, *alias_entry + str_len(*alias_entry) + 1,
+			write(1, value,
 					str_len(*alias_entry) + 1);
 			write(1, "\n", 1);
 		}
@@ -152,9 +155,10 @@ int add_alias(char *alias, shell_data *shell)
 		_strncpy(shell->aliases[j] + str_len(buffer) + 1, value, str_len(value));
 	}
 	else
+	{
 		shell->aliases[j] = malloc(str_len(alias) + 1);
 		_strncpy(shell->aliases[j], alias, str_len(alias));
-
+	}
 	free(shell->aliases[j]);
 	return (0);
 }
@@ -170,15 +174,16 @@ int alias_final(shell_data *shell)
 {
 	int index = 0;
 	char *result;
+	char *symbol = "=";
 
 	if (shell->words[1] == NULL)
 		return (show_alias(NULL, shell));
-	result = str_chr(shell->words[index], shell);
+	result = num_char(shell->words[index], symbol);
 
 	if (result != NULL)
 		add_alias(shell->words[index], shell);
 	else
-		show_alias(show->words[index], shell);
+		show_alias(shell->words[index], shell);
 
 	return (0);
 }

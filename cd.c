@@ -9,11 +9,12 @@
  */
 int directory(char *new_directory, shell_data *shell)
 {
-	if (shell == NULL || new_directory == NULL)
-		return (1);
 	char *previous_directory = NULL;
 	int result = 0;
 	char *pwd_value;
+
+	if (shell == NULL || new_directory == NULL)
+		return(1);
 
 	if (getcwd(previous_directory, 128) == NULL)
 		return (4);
@@ -49,19 +50,19 @@ int _cd(shell_data *shell)
 		if (str_cmp(shell->words[1], "-") == 0)
 		{
 			if (previous_directory)
-				result = directory(previous_directory);
+				result = directory(previous_directory, shell);
 			print_string(get_env_value("PWD", shell));
 			print_string("\n");
 			return (result);
 		}
 		else
-			return (directory(shell->words[1]));
+			return (directory(shell->words[1], shell));
 	}
 	else
 	{
 		if (!home)
 			home = getcwd(_home, 128);
-		return (directory(home));
+		return (directory(home, shell));
 	}
 	return (0);
 }
