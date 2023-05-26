@@ -71,7 +71,7 @@ void get_words(shell_data *shell)
 
 	for (index = 0; index < len; index++)
 	{
-		if (str_chr(*(shell->input + index), splitter) != NULL)
+		if (str_chr(shell->input[index], splitter) != NULL)
 		{
 			words++;
 			index += len_word(shell->input, splitter);
@@ -86,11 +86,11 @@ void get_words(shell_data *shell)
 	}
 	for (index = 0; index < len; index++)
 	{
-		if (str_chr(*(shell->input + index), splitter) != NULL)
+		if (str_chr(shell->input[index], splitter) != NULL)
 		{
 			shell->words[words++] = _strndup(shell->input + index,
-					str_chr(shell->input + index, splitter) - shell->input - index);
-			index = str_chr(shell->input + index, splitter) - shell->input;
+					str_chr(shell->input[index], splitter) - shell->input - index);
+			index = str_chr(shell->input[index], splitter) - shell->input;
 		}
 	}
 	shell->command = shell->words[0];

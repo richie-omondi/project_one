@@ -181,7 +181,7 @@ int alias_final(shell_data *shell)
 		return (show_alias(NULL, shell));
 	result = num_char(shell->words[index], symbol);
 
-	if (result != NULL)
+	if (result != 0)
 		add_alias(shell->words[index], shell);
 	else
 		show_alias(shell->words[index], shell);

@@ -50,19 +50,6 @@ typedef struct builtin_functions
 	int (*f)(shell_data *shell);
 } builtins_list;
 
-/**
- * struct set_env_args - struct containing set_env_variable arguments
- * @shell: struct containing data fed to the shell
- * @env_variable: environment variable
- * @env_value: environment value
- */
-struct set_env_args
-{
-	shell_data *shell;
-	char *env_variable;
-	char *env_value;
-}
-
 /****** Prototypes *****/
 void add_data_to_shell(shell_data *shell, int ac, char *av[], char **env);
 int handle_logical_ops(char **commands, int i);
@@ -133,7 +120,6 @@ int _cd(shell_data *shell);
 int _help(shell_data *shell);
 
 /**** Hanlde Built-in function ******/
-int builtin_set_env_wrapper(void *args);
 int handle_builtins(shell_data *shell);
 
 /***** Path functions *******/

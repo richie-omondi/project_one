@@ -161,10 +161,6 @@ int _env(shell_data *shell)
 	int i;
 	char *copy_of_variable = NULL;
 	char *save_copy_variable;
-	char *string;
-	char *symbol = "=";
-
-	string = shell->words[1];
 
 	if (shell->words[1] == NULL)
 		print_current_environment(shell);
@@ -172,7 +168,7 @@ int _env(shell_data *shell)
 	{
 		for (i = 0; shell->words[1][i]; i++)
 		{
-			if (str_cmp(shell->words[1][i], symbol) == 0)
+			if (shell->words[1][i] == "=")
 			{
 				copy_of_variable = malloc(str_len(shell->words[1]) + 1);
 				copy_of_variable[i] = '\0';
