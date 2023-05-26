@@ -2,7 +2,7 @@
 
 /**
  * execute_commands - executes commands passed to it
- * @shell struct containing data fed to the shell
+ * @shell: struct containing data fed to the shell
  *
  * Return: 0 on success
  */
@@ -22,6 +22,7 @@ int execute_commands(shell_data *shell)
 	if (code)
 		return (code);
 	else
+	{
 		child_pid = fork();
 
 		if (child_pid == -1)
@@ -34,7 +35,7 @@ int execute_commands(shell_data *shell)
 			code = execve(shell->words[0], shell->words, shell->env);
 			if (code == -1)
 			{
-				perror(data->command_name);
+				perror(shell->command);
 				exit(EXIT_FAILURE);
 			}
 		}
@@ -46,6 +47,6 @@ int execute_commands(shell_data *shell)
 			else if (WIFSIGNALED(shell_status))
 				errno = 128 + WTERMSIG(shell_status);
 		}
-
+	}
 		return (0);
 }

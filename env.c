@@ -11,9 +11,11 @@ char *get_env_value(char *env_variable, shell_data *shell)
 {
 	int i;
 	int variable_length;
+	extern char **environ;
+	char **env;
 
 	shell->env = environ;
-	char **env = shell->env;
+	env = shell->env;
 
 	if (env_variable == NULL || env == NULL)
 		return (NULL);
@@ -44,12 +46,14 @@ char *get_env_value(char *env_variable, shell_data *shell)
 int set_env_variable(char *env_variable, char *env_value, shell_data *shell)
 {
 	int i;
-	int variable_length = 0
+	int variable_length = 0;
 	bool is_new_variable = false;
+	extern char **environ;
+	char **env;
+	char *new_variable;
 
 	shell->env = environ;
-	char **env = shell->env;
-	char *new_variable;
+	env = shell->env;
 
 	if (env_variable == NULL || env_value == NULL || env == NULL)
 		return (0);
@@ -67,7 +71,7 @@ int set_env_variable(char *env_variable, char *env_value, shell_data *shell)
 		{
 			while (env[i][variable_length] == ' ')
 				variable_length++;
-			new_varible = true;
+			new_variable = true;
 			free(env[i]);
 			break;
 		}
@@ -93,12 +97,15 @@ int set_env_variable(char *env_variable, char *env_value, shell_data *shell)
 int unset_env_variable(shell_data *shell)
 {
 	int i;
+	int j;
 	int variable_length = 0;
+	extern char **environ;
+	char **env;
+	char *env_variable = shell->words[1];
+	char *env_value = shell->words[2];
 
 	shell->env = environ;
 	char **env = shell->env;
-	char *env_variable = shell->words[1];
-	char *env_value = shell->words[2];
 
 	if (env_variable == NULL)
 		return (0);
@@ -117,7 +124,7 @@ int unset_env_variable(shell_data *shell)
 			while (env[i][variable_length] == ' ')
 				variable_length++;
 			free(env[i]);
-			for (int j = i; env[i]; j++)
+			for (j = i; env[i]; j++)
 				env[j - 1] = env[j];
 			env[j - 1] = NULL;
 			return (5);
@@ -154,13 +161,18 @@ int _env(shell_data *shell)
 	int i;
 	char *copy_of_variable = NULL;
 	char *save_copy_variable;
+	char *symbol = "=";
+	char *string;
+
+	string = shell->words[1];
 
 	if (shell->words[1] == NULL)
 		print_current_environment(shell);
 	else
 	{
 		for (i = 0; shell->words[1][i]; i++)
-			if (shell->words[1][i] == '=')
+		{
+			if (shell->words[1][i] == symbol)
 			{
 				copy_of_variable = malloc(str_len(shell->words[1]) + 1);
 				copy_of_variable[i] = '\0';
@@ -169,7 +181,7 @@ int _env(shell_data *shell)
 					perror("copy of variable malloc");
 					return (1);
 				}
-				_strncpy(copy_of_variable, shell->words[1][i], i);
+				_strncpy(copy_of_variable, string[i], i);
 				get_env_value(copy_of_variable, shell);
 				save_copy_variable = str_dup(copy_of_variable);
 				if (save_copy_variable == NULL)
@@ -186,9 +198,7 @@ int _env(shell_data *shell)
 					print_string("\n");
 				}
 				else
-				{
 					set_env_variable(copy_of_variable, save_copy_variable, shell);
-				}
 				return (0);
 			}
 			copy_of_variable[i] = shell->words[1][i];

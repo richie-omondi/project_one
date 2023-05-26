@@ -7,12 +7,13 @@
  */
 void loop_shell(char *shell_sign, shell_data *shell)
 {
-	int result = 0, len = 0;
+	int result = 0;
+	int len = 0;
 
 	while (1)
 	{
 		print_string(shell_sign);
-		code = get_line(shell);
+		result = get_line(shell);
 
 		if (result == EOF)
 		{

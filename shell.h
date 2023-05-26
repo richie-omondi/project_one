@@ -22,7 +22,6 @@
  * @exe: executable file
  * @input: pointer to the input
  * @command: pointer to a command typed by the user
- * @counter: counts the number of executed commands
  * @fd: file descriptor
  * @words: tokenized input
  * @env: environ
@@ -36,7 +35,6 @@ typedef struct data
 	char **words;
 	char **env;
 	char **aliases;
-	int counter;
 	int fd;
 } shell_data;
 
@@ -44,7 +42,7 @@ typedef struct data
  * struct builtin_functions - struct containing components of a
  * built-in function
  * @f_name: built-in function name
- * @(*f)(shell_data *shell): function pointer
+ * @f: function pointer
  */
 typedef struct builtin_functions
 {
@@ -67,12 +65,16 @@ struct set_env_args
 
 /****** Prototypes ********/
 <<<<<<< HEAD
+<<<<<<< HEAD
 void add_data_to_shell(shell_data *shell, int argc, char *argv[], char *env[]);
 void readCommand(char *command, int maxLength);
 void parseCommand(char *command, char **arguments);
 =======
 void add_data_to_shell(shell_data *shell, int argc, char *argv[], char **env);
 >>>>>>> cd49bd90e8b0dff33f9e592797bb228aefaf93e5
+=======
+void add_data_to_shell(shell_data *shell, int ac, char *av[], char **env);
+>>>>>>> 71d22e1b76a33819026b9dc8ebec9ba4b4ddc870
 int handle_logical_ops(char **commands, int i);
 int get_line(shell_data  *shell);
 void loop_shell(char *shell_sign, shell_data *shell);
@@ -104,6 +106,7 @@ void free_and_close(shell_data *shell);
 /****** Math/Number functions ********/
 int _pow(int x, int y);
 int is_digit(int i);
+int num_char(char *str, char *letter);
 
 /******* Print functions ********/
 int print_string(char *s);
@@ -115,6 +118,7 @@ char *get_env_value(char *env_variable, shell_data *shell);
 int set_env_variable(char *env_variable, char *env_value, shell_data *shell);
 int unset_env_variable(shell_data *shell);
 int _env(shell_data *shell);
+void handle_variables(shell_data *shell);
 
 /******* Alias functions *****/
 char *alias(shell_data *shell, char *full_name);
