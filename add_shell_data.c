@@ -4,7 +4,7 @@
  * add_data_to_shell - adds data to the shell
  * @shell: pointer to the struct
  * @ac: number of arguments
- * @argv: array of strings as arguments
+ * @av: array of strings as arguments
  * @env: environment variables
  *
  * Return: void
@@ -14,7 +14,6 @@ void add_data_to_shell(shell_data *shell, int ac, char *av[], char **env)
 	shell->exe = av[0];
 	shell->input = NULL;
 	shell->command = NULL;
-	shell->counter = 0;
 
 	int index = 0;
 

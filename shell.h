@@ -22,7 +22,6 @@
  * @exe: executable file
  * @input: pointer to the input
  * @command: pointer to a command typed by the user
- * @counter: counts the number of executed commands
  * @fd: file descriptor
  * @words: tokenized input
  * @env: environ
@@ -36,7 +35,6 @@ typedef struct data
 	char **words;
 	char **env;
 	char **aliases;
-	int counter;
 	int fd;
 } shell_data;
 
@@ -44,7 +42,7 @@ typedef struct data
  * struct builtin_functions - struct containing components of a
  * built-in function
  * @f_name: built-in function name
- * @(*f)(shell_data *shell): function pointer
+ * @f: function pointer
  */
 typedef struct builtin_functions
 {
