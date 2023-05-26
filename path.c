@@ -71,7 +71,6 @@ char **separate_path(shell_data *shell)
 		free(paths[0]);
 		paths[0] = NULL;
 	}
-
 	for (j = num_paths - 1; j >= 0; j--)
 	{
 		if (paths[j][0] == '\0')
