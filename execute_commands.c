@@ -16,7 +16,6 @@ int execute_commands(shell_data *shell)
 
 	if (code  != -1)
 		return (code);
-
 	code = handle_path(shell);
 
 	if (code)

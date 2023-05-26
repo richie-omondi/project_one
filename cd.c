@@ -14,7 +14,7 @@ int directory(char *new_directory, shell_data *shell)
 	char *pwd_value;
 
 	if (shell == NULL || new_directory == NULL)
-		return(1);
+		return (1);
 
 	if (getcwd(previous_directory, 128) == NULL)
 		return (4);
