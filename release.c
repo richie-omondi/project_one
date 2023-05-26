@@ -26,10 +26,11 @@ void free_ptrs_arr(char **arr)
  */
 void free_specific_shell_data(shell_data *shell)
 {
+	int index;
 	if (shell->words != NULL)
 	{
-		for (int i = 0; shell->words[i] != NULL; i++)
-			free(shell->words[i]);
+		for (index = 0; shell->words[i] != NULL; index++)
+			free(shell->words[index]);
 		free(shell->words);
 	}
 	if (shell->input != NULL)

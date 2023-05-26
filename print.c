@@ -8,7 +8,7 @@
  */
 int print_string(char *s)
 {
-	return (write(STDOUT_FILENO, str, str_len(s)));
+	return (write(STDOUT_FILENO, s, str_len(s)));
 }
 
 /**
@@ -22,6 +22,10 @@ int show_error(int code, shell_data *shell)
 {
 	char *string;
 	int len = 0;
+	int i;
+	int j;
+	int k;
+	char *ptr;
 
 	while (*string)
 	{
@@ -31,7 +35,7 @@ int show_error(int code, shell_data *shell)
 
 	if (code == 2 || code == 3)
 	{
-		char *ptr = shell->exe;
+		ptr = shell->exe;
 
 		while (*ptr)
 		{
@@ -39,7 +43,7 @@ int show_error(int code, shell_data *shell)
 			ptr++;
 		}
 		write(STDERR_FILENO, ": ", 1);
-		for (int i = 0; i < len; i++)
+		for (i = 0; i < len; i++)
 			write(STDERR_FILENO, string + i, 1);
 		write(STDERR_FILENO, ": ", 1);
 		ptr = shell->words[0];
@@ -62,7 +66,7 @@ int show_error(int code, shell_data *shell)
 	}
 	else if (code == 127)
 	{
-		char *ptr = shell->exe;
+		ptr = shell->exe;
 
 		while (*ptr)
 		{
@@ -70,8 +74,8 @@ int show_error(int code, shell_data *shell)
 			ptr++;
 		}
 		write(STDERR_FILENO, ": ", 1);
-		for (int i = 0; i < len; i++)
-			write(STDERR_FILENO, string + i, 1);
+		for (j = 0; j < len; j++)
+			write(STDERR_FILENO, string + j, 1);
 		write(STDERR_FILENO, ": ", 1);
 		ptr = shell->exe;
 		while (*ptr)
@@ -83,7 +87,7 @@ int show_error(int code, shell_data *shell)
 	}
 	else if (code == 126)
 	{
-		char *ptr = data->program_name;
+		ptr = shell->exe;
 
 		while (*ptr)
 		{
@@ -91,8 +95,8 @@ int show_error(int code, shell_data *shell)
 			ptr++;
 		}
 		write(STDERR_FILENO, ": ", 1);
-		for (int i = 0; i < len; i++)
-			write(STDERR_FILENO, n_as_string + i, 1);
+		for (k = 0; k < len; k++)
+			write(STDERR_FILENO, string + i, 1);
 		write(STDERR_FILENO, ": ", 1);
 		ptr = shell->exe;
 		while (*ptr)

@@ -108,6 +108,7 @@ char *get_env_value(char *env_variable, shell_data *shell);
 int set_env_variable(char *env_variable, char *env_value, shell_data *shell);
 int unset_env_variable(shell_data *shell);
 int _env(shell_data *shell);
+void handle_variables(shell_data *shell);
 
 /******* Alias functions *****/
 char *alias(shell_data *shell, char *full_name);

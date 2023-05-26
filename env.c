@@ -198,9 +198,7 @@ int _env(shell_data *shell)
 					print_string("\n");
 				}
 				else
-				{
 					set_env_variable(copy_of_variable, save_copy_variable, shell);
-				}
 				return (0);
 			}
 			copy_of_variable[i] = shell->words[1][i];

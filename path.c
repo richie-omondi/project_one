@@ -45,21 +45,24 @@ char **separate_path(shell_data *shell)
 	char *path;
 	char **paths = NULL;
 	int num_paths = 0;
+	char *token;
+	int index;
+	int j;
 
 	path = get_env_value("PATH", shell);
 
 	if (path == NULL)
 		return (NULL);
 
-	for (char *token = str_chr(path, ':'); token != NULL;
+	for (token = str_chr(path, ':'); token != NULL;
 			token = str_chr(token + 1, ':'))
 		num_paths++;
 
 	paths = malloc(sizeof(char *) * num_paths);
 
-	for (int i = 0; i < num_paths; i++)
+	for (index = 0; index < num_paths; index++)
 	{
-		paths[i] = _strndup(path, str_chr(path, ':') - path);
+		paths[index] = _strndup(path, str_chr(path, ':') - path);
 		path = str_chr(path, ':') + 1;
 	}
 
@@ -69,12 +72,12 @@ char **separate_path(shell_data *shell)
 		paths[0] = NULL;
 	}
 
-	for (int i = num_paths - 1; i >= 0; i--)
+	for (j = num_paths - 1; j >= 0; j--)
 	{
-		if (paths[i][0] == '\0')
+		if (paths[j][0] == '\0')
 		{
-			free(paths[i]);
-			paths[i] = NULL;
+			free(paths[j]);
+			paths[j] = NULL;
 		}
 		else
 			break;
@@ -94,6 +97,7 @@ int handle_path(shell_data *shell)
 	char **paths;
 	int i;
 	int code = 0;
+	char *path;
 
 	if (!shell->command)
 		return (5);
@@ -101,7 +105,7 @@ int handle_path(shell_data *shell)
 	if (shell->command[0] == '/')
 		return (check_exe(shell->command));
 
-	char *path = malloc(str_len("/") + str_len(shell->command) + 1);
+	path = malloc(str_len("/") + str_len(shell->command) + 1);
 
 	if (!path)
 		return (7);
@@ -121,12 +125,12 @@ int handle_path(shell_data *shell)
 			errno = 0;
 			free(path);
 			shell->words[0] = str_dup(paths[i]);
-			free_ptrs_array(paths);
+			free_ptrs_arr(paths);
 			return (code);
 		}
 	}
 	free(path);
 	shell->words[0] = NULL;
-	free_ptrs_array(paths);
+	free_ptrs_arr(paths);
 	return (code);
 }
