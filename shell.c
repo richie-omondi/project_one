@@ -1,7 +1,5 @@
 #include "shell.h"
 
-#define MAX_COMMAND_LENGTH 100
-
 /**
  * handle_signal - prints a new prompt upon a signal
  * @signal: signal
