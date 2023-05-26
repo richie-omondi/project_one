@@ -71,7 +71,7 @@ int set_env_variable(char *env_variable, char *env_value, shell_data *shell)
 		{
 			while (env[i][variable_length] == ' ')
 				variable_length++;
-			new_variable = true;
+			is_new_variable = true;
 			free(env[i]);
 			break;
 		}
@@ -105,7 +105,7 @@ int unset_env_variable(shell_data *shell)
 	char *env_value = shell->words[2];
 
 	shell->env = environ;
-	char **env = shell->env;
+	env = shell->env;
 
 	if (env_variable == NULL)
 		return (0);
@@ -161,8 +161,8 @@ int _env(shell_data *shell)
 	int i;
 	char *copy_of_variable = NULL;
 	char *save_copy_variable;
-	char *symbol = "=";
 	char *string;
+	char *symbol = "=";
 
 	string = shell->words[1];
 
@@ -172,7 +172,7 @@ int _env(shell_data *shell)
 	{
 		for (i = 0; shell->words[1][i]; i++)
 		{
-			if (shell->words[1][i] == symbol)
+			if (str_cmp(shell->words[1][i], symbol) == 0)
 			{
 				copy_of_variable = malloc(str_len(shell->words[1]) + 1);
 				copy_of_variable[i] = '\0';
@@ -181,7 +181,7 @@ int _env(shell_data *shell)
 					perror("copy of variable malloc");
 					return (1);
 				}
-				_strncpy(copy_of_variable, string[i], i);
+				_strncpy(copy_of_variable, &string[i], i);
 				get_env_value(copy_of_variable, shell);
 				save_copy_variable = str_dup(copy_of_variable);
 				if (save_copy_variable == NULL)

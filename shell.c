@@ -26,6 +26,7 @@ void handle_signal(int num)
 int main(int ac, char *argv[], char *envp[])
 {
 	char *shell_sign = "\n($) ";
+	char *str;
 
 	shell_data shell_info = { NULL };
 
@@ -36,7 +37,7 @@ int main(int ac, char *argv[], char *envp[])
 	signal(SIGINT, handle_signal);
 
 	if (isatty(STDIN_FILENO) && isatty(STDOUT_FILENO))
-		return shell_sign;
+		str = shell_sign;
 
 	loop_shell(shell_sign, shell);
 

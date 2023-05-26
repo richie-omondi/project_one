@@ -24,16 +24,18 @@ int len_word(char *input, char *splitter)
  *
  * Return: start of the token
  */
-char *str_tok(char *string, const char *splitter)
+char *str_tok(char *string, char *splitter)
 {
 	static char *current_position;
+	char *start;
+	char *ptr;
 
 	if (string != NULL)
 		current_position = string;
 	if (current_position == NULL)
 		return (NULL);
-	char *start = current_position;
-	char *ptr = _strpbrk(current_position, splitter);
+	start = current_position;
+	ptr = _strpbrk(current_position, splitter);
 
 	if (ptr != NULL)
 	{
@@ -58,6 +60,7 @@ void get_words(shell_data *shell)
 	int len = 0;
 	int words = 2;
 	char *splitter = " \t";
+	char *result;
 
 	for (index = 0; *(shell->input + index); index++)
 		len++;
@@ -69,7 +72,9 @@ void get_words(shell_data *shell)
 
 	for (index = 0; index < len; index++)
 	{
-		if (*(shell->input + index) != splitter)
+		result = str_cmp(shell->input + index, splitter);
+
+		if (result != 0)
 		{
 			words++;
 			index += len_word(shell->input, splitter);

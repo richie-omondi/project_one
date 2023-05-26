@@ -24,7 +24,7 @@ int builtin_set_env_wrapper(void *args)
 int handle_builtins(shell_data *shell)
 {
 	size_t index;
-	const struct builtins_list functions[] = {
+	builtins_list functions[] = {
 		{ "exit", &exit_shell },
 		{ "help", &_help },
 		{ "cd", &_cd },
@@ -40,9 +40,9 @@ int handle_builtins(shell_data *shell)
 	{
 		if (str_cmp(functions[index].f_name, shell->command) == 0)
 		{
-			if (functions[i].f == &set_env_variable)
+			if (functions[index].f == &set_env_variable)
 			{
-				struct set_env_args args = { shell->args[1], shell->args[2], shell };
+				struct set_env_args args = { shell, s->args[1], s->args[2] };
 
 				return (functions[index].f(&args));
 			}

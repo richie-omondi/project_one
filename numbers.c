@@ -43,7 +43,7 @@ int is_digit(int i)
  */
 int num_char(char *str, char *letter)
 {
-	int i
+	int i;
 	int num = 0;
 
 	for (i = 0; str[i] != '\0'; i++)

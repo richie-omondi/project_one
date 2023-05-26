@@ -63,18 +63,8 @@ struct set_env_args
 	char *env_value;
 }
 
-/****** Prototypes ********/
-<<<<<<< HEAD
-<<<<<<< HEAD
-void add_data_to_shell(shell_data *shell, int argc, char *argv[], char *env[]);
-void readCommand(char *command, int maxLength);
-void parseCommand(char *command, char **arguments);
-=======
-void add_data_to_shell(shell_data *shell, int argc, char *argv[], char **env);
->>>>>>> cd49bd90e8b0dff33f9e592797bb228aefaf93e5
-=======
+/****** Prototypes *****/
 void add_data_to_shell(shell_data *shell, int ac, char *av[], char **env);
->>>>>>> 71d22e1b76a33819026b9dc8ebec9ba4b4ddc870
 int handle_logical_ops(char **commands, int i);
 int get_line(shell_data  *shell);
 void loop_shell(char *shell_sign, shell_data *shell);
@@ -129,7 +119,7 @@ int alias_final(shell_data *shell);
 
 /******* Tokenization functions *******/
 int len_word(char *input, char *splitter);
-char *str_tok(char *string, const char *splitter);
+char *str_tok(char *string, char *splitter);
 void get_words(shell_data *shell);
 
 /****** Exit functions *******/

@@ -46,8 +46,8 @@ void handle_variables(shell_data *shell)
 			str_cat(buffer, path);
 			str_cat(buffer, shell->input + i + 2);
 		}
-		else if (*(buffer + i) == '$' && *(buffer + i + 1) == ' '
-				|| *(buffer + i + 1) == '\0')
+		else if (*(buffer + i) == '$' && (*(buffer + i + 1) == ' '
+				|| *(buffer + i + 1) == '\0'))
 			continue;
 		else if (*(buffer + i) == '$')
 		{

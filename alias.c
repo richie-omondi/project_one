@@ -11,12 +11,13 @@ char *alias(shell_data *shell, char *full_name)
 {
 	int len;
 	int index;
+	char *str;
 
 	if (full_name == NULL || shell->aliases == NULL)
 		return (NULL);
 
 	len = str_len(full_name);
-	char *str = malloc(str_len(shell->aliases[index]) - len + 1)
+	str = malloc(str_len(shell->aliases[index]) - len + 1);
 
 	for (index = 0; shell->aliases[index]; index++)
 	{
@@ -173,7 +174,7 @@ int add_alias(char *alias, shell_data *shell)
 int alias_final(shell_data *shell)
 {
 	int index = 0;
-	char *result;
+	int result;
 	char *symbol = "=";
 
 	if (shell->words[1] == NULL)
