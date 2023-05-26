@@ -66,11 +66,19 @@ struct set_env_args
 }
 
 /****** Prototypes ********/
+<<<<<<< HEAD
 void add_data_to_shell(shell_data *shell, int argc, char *argv[], char *env[]);
 void readCommand(char *command, int maxLength);
 void parseCommand(char *command, char **arguments);
+=======
+void add_data_to_shell(shell_data *shell, int argc, char *argv[], char **env);
+>>>>>>> cd49bd90e8b0dff33f9e592797bb228aefaf93e5
 int handle_logical_ops(char **commands, int i);
 int get_line(shell_data  *shell);
+void loop_shell(char *shell_sign, shell_data *shell);
+
+/***** Execute functions *******/
+int execute_commands(shell_data *shell);
 
 /******** String functions *******/
 char *str_dup(char *string);
@@ -100,6 +108,7 @@ int is_digit(int i);
 /******* Print functions ********/
 int print_string(char *s);
 void print_current_environment(shell_data *shell);
+int show_error(int code, shell_data *shell);
 
 /****** Environment functions *********/
 char *get_env_value(char *env_variable, shell_data *shell);
@@ -128,5 +137,14 @@ int _cd(shell_data *shell);
 
 /***** Help functions *******/
 int _help(shell_data *shell);
+
+/**** Hanlde Built-in function ******/
+int builtin_set_env_wrapper(void *args);
+int handle_builtins(shell_data *shell);
+
+/***** Path functions *******/
+int check_exe(char *path);
+char **separate_path(shell_data *shell);
+int handle_path(shell_data *shell);
 
 #endif

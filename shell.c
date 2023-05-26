@@ -10,7 +10,7 @@
  */
 void handle_signal(int signal)
 {
-	char *prompt = "\n($) ";
+	char *shell_sign = "\n($) ";
 
 	(void)signal;
 	signal(SIGINT, handle_signal);
@@ -27,17 +27,20 @@ void handle_signal(int signal)
  */
 int main(int ac, char *argv[], char *envp[])
 {
-	char command[MAX_COMMAND_LENGTH];
-	char *arguments[MAX_COMMAND_LENGTH];
+	char *shell_sign = "\n($) ";
 
-	if (ac == 1)
-	{
-		implement_prompt(ac, envp);
-	}
-	while (1)
-	{
-		printf("shell> ");
-		readCommand(command);
-		parseCommand(command, arguments);
-	}
+	struct shell_data shell_info = {NULL};
+
+	struct shell_data *shell = &shell_info;
+
+	add_data_to_shell(shell, argc, argv, env);
+
+	signal(SIGINT, handle_signal);
+
+	if (isatty(STDIN_FILENO) && isatty(STDOUT_FILENO))
+		shell_sign;
+
+	loop_shell(shell_sign, shell);
+
+	return (0);
 }
