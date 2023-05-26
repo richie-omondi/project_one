@@ -15,6 +15,8 @@ int print_string(char *s)
  * show_error - prints errors to stderr
  * @code: error code to be printed
  * @shell: struct containing data fed to the shell
+ *
+ * Return: 0 on success
  */
 int show_error(int code, shell_data *shell)
 {

@@ -2,7 +2,7 @@
 
 /**
  * execute_commands - executes commands passed to it
- * @shell struct containing data fed to the shell
+ * @shell: struct containing data fed to the shell
  *
  * Return: 0 on success
  */
