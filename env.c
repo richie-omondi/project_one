@@ -81,7 +81,7 @@ int set_env_variable(char *env_variable, char *env_value, shell_data *shell)
 	str_cat(new_variable, "=");
 	str_cat(new_variable, env_value);
 
-	if (new_variable)
+	if (is_new_variable)
 		env[i] = new_variable;
 	free(new_variable);
 	return (0);
@@ -141,7 +141,7 @@ int unset_env_variable(shell_data *shell)
  */
 void print_current_environment(shell_data *shell)
 {
-	int i;
+	int i = 0;
 
 	while (shell->env[i] != NULL)
 	{
@@ -160,7 +160,8 @@ int _env(shell_data *shell)
 {
 	int i;
 	char *copy_of_variable = NULL;
-	char *save_copy_variable;
+	char *save_copy_variable = NULL;
+	char *string = str_dup(shell->words[1]);
 
 	if (shell->words[1] == NULL)
 		print_current_environment(shell);
@@ -168,7 +169,7 @@ int _env(shell_data *shell)
 	{
 		for (i = 0; shell->words[1][i]; i++)
 		{
-			if (shell->words[1][i] == "=")
+			if (string[i] == '=')
 			{
 				copy_of_variable = malloc(str_len(shell->words[1]) + 1);
 				copy_of_variable[i] = '\0';

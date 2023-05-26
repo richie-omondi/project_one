@@ -22,7 +22,7 @@ int show_error(int code, shell_data *shell)
 {
 	char *string;
 	int len = 0;
-	int i;
+	int i = 0;
 	int j;
 	int k;
 	char *ptr;

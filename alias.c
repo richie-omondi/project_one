@@ -10,7 +10,7 @@
 char *alias(shell_data *shell, char *full_name)
 {
 	int len;
-	int index;
+	int index = 0;
 	char *str;
 
 	if (full_name == NULL || shell->aliases == NULL)

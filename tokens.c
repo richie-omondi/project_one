@@ -57,6 +57,7 @@ char *str_tok(char *string, char *splitter)
 void get_words(shell_data *shell)
 {
 	int index = 0;
+	int j;
 	int len = 0;
 	int words = 2;
 	char *splitter = " \t";
@@ -71,13 +72,15 @@ void get_words(shell_data *shell)
 
 	for (index = 0; index < len; index++)
 	{
-		if (str_chr(shell->input[index], splitter) != NULL)
+		for (j = 0; splitter[j]; j++)
 		{
-			words++;
-			index += len_word(shell->input, splitter);
+			if (shell->input[index] == splitter[j])
+			{
+				words++;
+				index += len_word(shell->input, splitter);
+			}
 		}
 	}
-
 	shell->words = malloc(words * sizeof(char *));
 	if (shell->words == NULL)
 	{
@@ -86,12 +89,8 @@ void get_words(shell_data *shell)
 	}
 	for (index = 0; index < len; index++)
 	{
-		if (str_chr(shell->input[index], splitter) != NULL)
-		{
-			shell->words[words++] = _strndup(shell->input + index,
-					str_chr(shell->input[index], splitter) - shell->input - index);
-			index = str_chr(shell->input[index], splitter) - shell->input;
-		}
+		if (str_tok(shell->input + index, " \t") != NULL)
+			shell->words[words++] = str_tok(NULL, " \t");
 	}
 	shell->command = shell->words[0];
 	free_ptrs_arr(shell->words);
