@@ -60,7 +60,6 @@ void get_words(shell_data *shell)
 	int len = 0;
 	int words = 2;
 	char *splitter = " \t";
-	char *result;
 
 	for (index = 0; *(shell->input + index); index++)
 		len++;
@@ -72,14 +71,10 @@ void get_words(shell_data *shell)
 
 	for (index = 0; index < len; index++)
 	{
-		result = str_cmp(shell->input + index, splitter);
-
-		if (result != 0)
+		if (str_chr(*(shell->input + index), splitter) != NULL)
 		{
 			words++;
 			index += len_word(shell->input, splitter);
-
-			return (words);
 		}
 	}
 
@@ -91,7 +86,7 @@ void get_words(shell_data *shell)
 	}
 	for (index = 0; index < len; index++)
 	{
-		if (str_chr(*(shell->input + index, splitter)) != NULL)
+		if (str_chr(*(shell->input + index), splitter) != NULL)
 		{
 			shell->words[words++] = _strndup(shell->input + index,
 					str_chr(shell->input + index, splitter) - shell->input - index);
