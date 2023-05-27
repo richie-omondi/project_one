@@ -11,6 +11,9 @@ int execute_commands(shell_data *shell)
 	int code = 0;
 	int shell_status;
 	pid_t child_pid;
+	extern char **environ;
+
+	shell->env = environ;
 
 	code = handle_builtins(shell);
 

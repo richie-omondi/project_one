@@ -10,9 +10,9 @@
  */
 char *str_dup(char *string)
 {
-	int i;
-	int length;
-	char *dup;
+	int i = 0;
+	int length = 0;
+	char *dup = NULL;
 
 	if (string == NULL)
 		return (NULL);

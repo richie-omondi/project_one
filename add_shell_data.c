@@ -12,7 +12,9 @@
 void add_data_to_shell(shell_data *shell, int ac, char *av[], char **env)
 {
 	int index = 0;
+	extern char **environ;
 
+	shell->env = environ;
 	shell->exe = av[0];
 	shell->input = NULL;
 	shell->command = NULL;

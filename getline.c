@@ -10,8 +10,8 @@
 int get_line(shell_data *shell)
 {
 	char buffer[BUFFER_SIZE] = {'\0'};
-	static char **commands;
-	static char **operators;
+	static char **commands = {NULL};
+	static char **operators = {NULL};
 	ssize_t bytes;
 	int i = 0;
 
@@ -31,11 +31,11 @@ int get_line(shell_data *shell)
 			if (buffer[i] == '\n' || buffer[i] == ';')
 				break;
 		}
-		commands = malloc(i + 1);
+		commands[0] = malloc(i + 1);
 		if (!commands)
 			return (-1);
-		_strncpy(*commands, buffer, i);
-		commands[i][i] = '\0';
+		mem_cpy(commands[0], buffer, i);
+		commands[0][i] = '\0';
 		i++;
 		while (i < bytes)
 		{
@@ -46,7 +46,7 @@ int get_line(shell_data *shell)
 				commands[i] = malloc(bytes - i + 1);
 				if (!commands)
 					return (-1);
-				_strncpy(*commands, buffer + i, bytes - i);
+				mem_cpy(commands[i], buffer + i, bytes - i);
 				commands[i][bytes - i] = '\0';
 				break;
 			}
