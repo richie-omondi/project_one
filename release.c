@@ -27,6 +27,7 @@ void free_ptrs_arr(char **arr)
 void free_specific_shell_data(shell_data *shell)
 {
 	int index;
+
 	if (shell->words != NULL)
 	{
 
